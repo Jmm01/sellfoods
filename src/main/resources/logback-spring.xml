@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<configuration>
+<!--    <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">-->
+<!--        <layout class="ch.qos.logback.classic.PatternLayout">-->
+<!--            <pattern>-->
+<!--                %d - %msg%n-->
+<!--            </pattern>-->
+<!--        </layout>-->
+<!--    </appender>-->
+
+<!--    配置控制台的输出-->
+    <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>
+                %d - %msg%n
+            </pattern>
+        </layout>
+    </appender>
+
+<!--    配置文件-->
+    <appender name = "fileInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender" >
+<!--        过滤器,如果是error信息就不输出，其他级别信息正常输出-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>DENY</onMatch>
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>
+                %msg%n
+            </pattern>
+        </encoder>
+<!--        滚动策略,每天输出-->
+        <rollingPolicy class = "ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+<!--            创建路径-->
+            <fileNamePattern>D:\apache-tomcat-7.0.109\logs\sell\info.%d.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <appender name = "fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender" >
+<!--        过滤器，error日志文件里只希望输出error级信息-->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+<!--        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
+<!--            <level>ERROR</level>-->
+<!--        </filter>-->
+        <encoder>
+            <pattern>
+                %msg%n
+            </pattern>
+        </encoder>
+        <rollingPolicy class = "ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>D:\apache-tomcat-7.0.109\logs\sell\error.%d.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+
+    <root level="info">
+        <appender-ref ref="consoleLog" />
+        <appender-ref ref="fileInfoLog" />
+        <appender-ref ref="fileErrorLog" />
+    </root>
+</configuration>

@@ -1,0 +1,30 @@
+<script>
+    function onBridgeReady(){
+        WeixinJSBridge.invoke(
+            'getBrandWCPayRequest', {
+                "appId":"wxd898fcb01713c658",     //公众号ID，由商户传入
+                "timeStamp":"1629038319",         //时间戳，自1970年以来的秒数
+                "nonceStr":"ekWp3IDXQ7405JFK", //随机串
+                "package":"prepay_id=wx152238382068817821d716b64db8a80000",
+                "signType":"MD5",         //微信签名方式：
+                "paySign":"79338B5D4340FC3031735D4208445C7A" //微信签名
+            },
+            function(res){
+                if(res.err_msg == "get_brand_wcpay_request:ok" ){
+                    // 使用以上方式判断前端返回,微信团队郑重提示：
+                    //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
+                }
+            });
+    }
+    if (typeof WeixinJSBridge == "undefined"){
+        if( document.addEventListener ){
+            document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+        }else if (document.attachEvent){
+            document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+            document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+        }
+    }else{
+        onBridgeReady();
+    }
+
+</script>

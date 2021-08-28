@@ -1,0 +1,71 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://192.168.134.52/sell?characterEncoding=utf-8&useSSL=false
+  jpa:
+    show-sql: true
+#所有返回给前端的对象都过滤掉为null的字段
+  jackson:
+    default-property-inclusion: non_null
+#redis的配置
+  redis:
+    host: 192.168.134.52
+    port: 6379
+#    password:
+
+#使mybatis执行的sql语句打印出来
+logging:
+  level:
+    com.imooc.sell.dataobject.mapper: trace
+
+#配置mybatis的xml文件的路径
+mybatis:
+#  classpath:指的是resources包的路径
+  mapper-locations: classpath:mapper/*.xml
+wechat:
+  #公众账号，授权
+#  wx7287aa4cf6d725d4 自己的测试号
+#  d8c2a01af0edb92756654a90911f351a
+  mpAppId: wx7287aa4cf6d725d4             # wxd898fcb01713c658 #支付用师兄源码里面提供的。 授权用自己测试号的。
+  mpAppSecret: d8c2a01af0edb92756654a90911f351a #
+  #开放平台，卖家扫码登陆用
+#  oTgZpwcd5WplmhzZxcdUs4l7Iv8o  师兄干货借用来的openid放在数据库订单的openid里面
+  openAppId: wx6ad144e54af67d87
+  openAppSecret: 91a2ff6d38a2bbccfb7e9f9079108e2e #用师兄源码里面提供的
+
+  #支付/商户号
+  mchId: 1483469312
+  mchKey: 7mdApPMfXddfWWbbP4DUaVYm2wjyh3v3
+  #发起支付不需要证书，退款需要
+  keyPath: C:/Users/JMM/Desktop/springboot/sell/h5.p12
+  notifyUrl: http://sellfoods.natapp1.cc/sell/pay/notify
+  templateId:
+    orderStatus: TnPnarduOh9YURYZHl2iB4BVtJFblwNN16dd7QTqQE8
+
+projecturl:
+  wechatMpAuthorize: http://sellfoods.natapp1.cc
+  wechatOpenAuthorize: http://sellfoods.natapp1.cc
+  sell: http://sellfoods.natapp1.cc
+
+server:
+  servlet:
+    context-path: /sell
+
+freemarker:
+  suffix: .ftlh
+#server:
+#  context-path: /sell   #url的前缀，以/sell/buyer/product/list这样的格式访问，最前面的路径可以在这里统一定义
+
+#  第一种配置方式
+#logging:
+#  pattern:
+##    配置日志的格式，d是日期，msg是日志信息，%n是换行
+#    console: "%d - %msg%n"
+#  file:
+##    配置日志输出文件的指定路径和文件名字
+#    path: D:\apache-tomcat-7.0.109\logs\sell.log
+##    指定日志输出级别
+#    level: debug
+
